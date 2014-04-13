@@ -33,6 +33,7 @@ def init():
         return weatherCfg.get('Weather',opt)
 
     weatherCfg=ConfigParser.ConfigParser()
+    # TODO:Change the path of weatherpy.ini
     if os.name=='nt':
         weatherCfg.read("weatherpy.ini")
             #weatherCfg.read(os.environ['HOMEPATH']+'weatherpy.ini')
