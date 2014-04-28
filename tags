@@ -5,11 +5,16 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 ConfigParser	.\weathercfg.py	/^import ConfigParser,optparse,os$/;"	i
-getCityCodeCfg	.\weathercfg.py	/^    def getCityCodeCfg():$/;"	f	function:init
+codingDetect	.\weatherget.py	/^from chardet import detect as codingDetect$/;"	i
+getCityCfg	.\weathercfg.py	/^    def getCityCfg():$/;"	f	function:init
+getWeatherByCityName	.\weatherget.py	/^def getWeatherByCityName(cityName='New York'):$/;"	f
 getWeatherCfg	.\weathercfg.py	/^    def getWeatherCfg(opt):$/;"	f	function:init
+httpGet	.\weatherget.py	/^from requests import get as httpGet$/;"	i
 init	.\weathercfg.py	/^def init():$/;"	f
 optparse	.\weathercfg.py	/^import ConfigParser,optparse,os$/;"	i
 os	.\tests\weathercfgtest.py	/^import sys,os$/;"	i
 os	.\weathercfg.py	/^import ConfigParser,optparse,os$/;"	i
+stringToXml	.\weatherget.py	/^from xml.dom.minidom import parseString as stringToXml$/;"	i
 sys	.\tests\weathercfgtest.py	/^import sys,os$/;"	i
+urlQuote	.\weatherget.py	/^from urllib import quote as urlQuote$/;"	i
 weathercfg	.\tests\weathercfgtest.py	/^import weathercfg$/;"	i

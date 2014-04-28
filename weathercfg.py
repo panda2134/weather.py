@@ -9,17 +9,17 @@ import ConfigParser,optparse,os
 
 def init():
     
-    def getCityCodeCfg():
+    def getCityCfg():
         '''
         Howto:
         >>> import weathercfg
         >>> weathercfg.init()
-        >>> weathercfg.getCityCodeCfg()
+        >>> weathercfg.getCityCfg()
         10000000
         
-        Get the Citycode in Config File
+        Get the City in Config File
         '''
-        return weatherCfg.getint('City','citycode')
+        return weatherCfg.get('City','city')
     def getWeatherCfg(opt):
         '''
         Howto:
@@ -44,23 +44,24 @@ def init():
         weatherCfg.read("weatherpy.ini")
     
     weatherOptParser=optparse.OptionParser()
-    weatherOptParser.add_option("-c","--citycode",action="store",type="int",dest="citycode")
-    weatherOptParser.add_option("-t","--temprature",action="store",type="choice",dest="tempratureUnit",choices=['C','F'])
+    weatherOptParser.add_option("-c","--city",action="store",type="string",dest="city")
+    # TODO:Let temprature unit to be able to choice
+    #weatherOptParser.add_option("-t","--temprature",action="store",type="choice",dest="tempratureUnit",choices=['C','F'])
     weatherOptParser.add_option("-d","--weatherday",action="store",type="int",dest="weatherDay")
     try:
-        weatherOptParser.set_defaults(citycode=getCityCodeCfg())
+        weatherOptParser.set_defaults(city=getCityCfg())
     except ConfigParser.NoOptionError:
-        weatherOptParser.set_defaults(citycode=10100000)
-        #        Search the Citycode of Beijing^^^^^^^^
+        weatherOptParser.set_defaults(city='Beijing')
     except:
         pass
     
-    try:
-        weatherOptParser.set_defaults(tempratureUnit=getWeatherCfg('temprature_unit'))
-    except ConfigParser.NoOptionError:
-        weatherOptParser.set_defaults(tempratureUnit='C')
-    except:
-        pass
+    # TODO:Let temprature unit to be able to choice
+    #try:
+    #    weatherOptParser.set_defaults(tempratureUnit=getWeatherCfg('temprature_unit'))
+    #except ConfigParser.NoOptionError:
+    #    weatherOptParser.set_defaults(tempratureUnit='C')
+    #except:
+    #    pass
     
     try:
         weatherOptParser.set_defaults(weatherDay=getWeatherCfg('weather_day'))
