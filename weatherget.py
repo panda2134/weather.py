@@ -5,30 +5,7 @@ from urllib import quote as urlQuote
 from chardet import detect as codingDetect
 # using service from "webxml.com.cn"
 # Sorry,Only support the weather of China
-#TODO:API:
-#province
-#city
-#citycode
-#cityimage
-#publish time
-#today's temprature
-#today's weather
-#today's wind
-#picture ->a.m.
-#picture ->p.m.
-#the weather now
-#wearing,sensitiveness,sports,washCar,dry,trip,road,comfort,air,UV mark
-#tomorrow's temprature
-#tomorrow's weather
-#tomorrow's wind
-#picture ->a.m.
-#picture ->p.m.
-#the day after tomorrow's temprature
-#the day after tomorrow's weather
-#the day after tomorrow's wind
-#picture ->a.m.
-#picture ->p.m.
-#desciption of the city
+
 def getWeatherByCityName(cityName='58367'):
     r=httpGet('http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName?theCityName=%s' %urlQuote(cityName))
     if not r.status_code==200:
@@ -37,4 +14,35 @@ def getWeatherByCityName(cityName='58367'):
     weatherInfo=[x.firstChild.data.strip().encode('utf8') for x in stringToXml(r.text.encode('utf8')).getElementsByTagName('string') if not x==None ]
     weatherInfo[1]=weatherInfo[1].decode(codingDetect(weatherInfo[1])['encoding'])
     weatherInfo[11]=weatherInfo[11].decode(codingDetect(weatherInfo[11])['encoding'])
-    return weatherInfo
+    weatherInfo_d={
+            'province':weatherInfo[0],
+            'city':weatherInfo[1],
+            'citycode':weatherInfo[2],
+            'cityimage':weatherInfo[3],
+            'publish_t':weatherInfo[4],
+            'd0':{
+                'temp':weatherInfo[5],
+                'weather':weatherInfo[6],
+                'wind':weatherInfo[7],
+                'pic_am':weatherInfo[8],
+                'pic_pm':weatherInfo[9],
+                },
+            'weather_now':weatherInfo[10],
+            'marks':weatherInfo[11],
+            'd1':{
+                'temp':weatherInfo[12],
+                'weather':weatherInfo[13],
+                'wind':weatherInfo[14],
+                'pic_am':weatherInfo[15],
+                'pic_pm':weatherInfo[16]
+                },
+            'd2':{
+                'temp':weatherInfo[17],
+                'weather':weatherInfo[18],
+                'wind':weatherInfo[19],
+                'pic_am':weatherInfo[20],
+                'pic_pm':weatherInfo[21],
+                },
+            'description':weatherInfo[22],
+            }
+    return weatherInfo_d

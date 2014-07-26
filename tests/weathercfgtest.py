@@ -1,7 +1,7 @@
 import sys,os
-sys.path.append('../')
-import weathercfg
+sys.path.append('..')
 os.chdir('..')
+import weathercfg
 weathercfg.init()
-print weathercfg.weatherOpt
-
+print weathercfg.weatherOpt  # @UndefinedVariable
+#An error of pydev,it's defined yet
